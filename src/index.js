@@ -1,15 +1,15 @@
 // ITERATION 1
 
 function updateSubtotal(product) {
-  console.log('Calculating subtotal, yey!');
+  console.log("Calculating subtotal, yey!");
 
   //... your code goes here
   let priceElement = product.querySelector(".price span");
   let quantityElement = product.querySelector(".quantity input");
-  
+
   let price = priceElement.innerText;
   let quantity = quantityElement.value;
-  
+
   let subtotalPrice = price * quantity;
 
   let subtotalElement = product.querySelector(".subtotal span");
@@ -35,34 +35,35 @@ function calculateAll() {
   // ITERATION 3
   //... your code goes here
 
-  let total = 0
+  let total = 0;
 
-  for(let i = 0; i <products.length; i++){
-    let subtotal = Number(products[i].querySelector('.subtotal span').innerText);
-    total += subtotal
+  for (let i = 0; i < products.length; i++) {
+    let subtotal = Number(
+      products[i].querySelector(".subtotal span").innerText
+    );
+    total += subtotal;
   }
 
   let totalElement = document.querySelector("#total-value span");
-  totalElement.innerText = total
+  totalElement.innerText = total;
 }
 
 // ITERATION 4
 
 function removeProduct(event) {
   const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+  console.log("The target in remove is:", target);
   //... your code goes here
   const buttonClicked = target;
   const productElement = buttonClicked.closest(".product");
   let totalPrice = document.querySelector("#total-value span");
-  let productSubtotal = productElement.querySelector(".subtotal span")
+  let productSubtotal = productElement.querySelector(".subtotal span");
 
   newPrice = Number(totalPrice.innerText) - Number(productSubtotal.innerText);
 
-  totalPrice.innerText = newPrice
+  totalPrice.innerText = newPrice;
 
-  productElement.innerHTML = "";
-
+  productElement.remove();
 }
 
 // ITERATION 5
@@ -70,8 +71,12 @@ function removeProduct(event) {
 function createProduct() {
   //... your code goes here
 
-  const newProductInput = document.querySelector(`tfoot tr td input[type="text"]`);
-  const newPriceInput = document.querySelector(`tfoot tr td input[type="number"]`);
+  const newProductInput = document.querySelector(
+    `tfoot tr td input[type="text"]`
+  );
+  const newPriceInput = document.querySelector(
+    `tfoot tr td input[type="number"]`
+  );
 
   const newProduct = newProductInput.value;
   const newPrice = newPriceInput.value;
@@ -89,27 +94,29 @@ function createProduct() {
         <td class="subtotal">$<span>0</span></td>
         <td class="action">
           <button class="btn btn-remove">Remove</button>
-        </td>`
+        </td>`;
 
   document.querySelector("tbody").appendChild(newProductRow);
 
   newProductInput.value = "";
-  newPriceInput.value = 0 ;
+  newPriceInput.value = 0;
 
-  newProductRow.querySelector(".btn-remove").addEventListener("click", removeProduct);
+  newProductRow
+    .querySelector(".btn-remove")
+    .addEventListener("click", removeProduct);
 }
 
-window.addEventListener('load', () => {
-  const calculatePricesBtn = document.getElementById('calculate');
-  calculatePricesBtn.addEventListener('click', calculateAll);
+window.addEventListener("load", () => {
+  const calculatePricesBtn = document.getElementById("calculate");
+  calculatePricesBtn.addEventListener("click", calculateAll);
 
   //... your code goes here
 
   const removeProductBtn = document.querySelectorAll(".btn-remove");
-  removeProductBtn.forEach(element => {
-    element.addEventListener("click", removeProduct)
+  removeProductBtn.forEach((element) => {
+    element.addEventListener("click", removeProduct);
   });
 
   const newProductBtn = document.querySelector("#create");
-  newProductBtn.addEventListener("click", createProduct)
+  newProductBtn.addEventListener("click", createProduct);
 });
